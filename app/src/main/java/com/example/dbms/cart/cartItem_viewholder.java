@@ -1,25 +1,26 @@
-package com.example.dbms;
+package com.example.dbms.cart;
 
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class searchItem_viewholder extends RecyclerView.ViewHolder {
+import com.example.dbms.R;
 
+public class cartItem_viewholder extends RecyclerView.ViewHolder{
     private TextView itemname;
     private ImageButton itemphoto;
     private Button checkbutton;
 
-    public searchItem_viewholder(@NonNull View itemView){
+    public cartItem_viewholder(@NonNull View itemView){
 
         super(itemView);
-        itemname = itemView.findViewById(R.id.search_itemname);
-        itemphoto = itemView.findViewById(R.id.info_button);
-        checkbutton = itemView.findViewById(R.id.search_button);
+        itemname = itemView.findViewById(R.id.cartname);
+        checkbutton = itemView.findViewById(R.id.cancelbutton);
 
     }
 

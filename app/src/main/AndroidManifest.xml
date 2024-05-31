@@ -13,13 +13,13 @@
         android:theme="@style/Theme.DBMS"
         tools:targetApi="31">
         <activity
-            android:name=".drawer_item"
+            android:name=".drawer.drawer_item"
             android:exported="false" />
         <activity
-            android:name=".item_page"
+            android:name=".pages.item_page"
             android:exported="false" />
         <activity
-            android:name=".login_page"
+            android:name=".pages.login_page"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,19 +28,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".map"
+            android:name=".pages.map"
             android:exported="false" />
         <activity
-            android:name=".cart_page"
+            android:name=".pages.cart_page"
             android:exported="false" />
         <activity
-            android:name=".personal_page"
+            android:name=".pages.personal_page"
             android:exported="false" />
         <activity
-            android:name=".search_page"
+            android:name=".pages.search_page"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".pages.MainActivity"
             android:exported="false" />
     </application>
 

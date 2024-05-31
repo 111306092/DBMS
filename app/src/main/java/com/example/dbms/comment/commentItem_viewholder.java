@@ -1,4 +1,4 @@
-package com.example.dbms;
+package com.example.dbms.comment;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -6,6 +6,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.dbms.R;
 
 public class commentItem_viewholder extends RecyclerView.ViewHolder {
 

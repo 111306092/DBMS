@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E0F3C2"
-    tools:context=".item_page">
+    tools:context=".pages.item_page">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -56,7 +56,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="150dp">
 
                     <TextView
                         android:id="@+id/itemprice"
@@ -130,7 +130,7 @@
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="40dp"
                     android:layout_marginTop="10dp"
-                    android:text="評論\n-----------------------------------------" />
+                    android:text="評論\n---------------------------------------" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -145,7 +145,7 @@
                         android:layout_height="44dp"
                         android:ems="100"
                         android:inputType="text"
-                        android:text="評論"
+                        android:text=""
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.059"
@@ -157,6 +157,7 @@
                         android:id="@+id/sendbutton"
                         android:layout_width="72dp"
                         android:layout_height="33dp"
+                        android:layout_marginLeft="240dp"
                         android:background="@drawable/login_page_button"
                         android:text="送出"
                         android:textColor="@color/black"
@@ -164,10 +165,10 @@
                         app:backgroundTint="@null"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.938"
+                        app:layout_constraintHorizontal_bias="0.988"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.234" />
+                        app:layout_constraintVertical_bias="0.407" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

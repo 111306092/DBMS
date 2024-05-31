@@ -1,4 +1,4 @@
-package com.example.dbms;
+package com.example.dbms.comment;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,10 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.dbms.R;
+import com.example.dbms.comment.commentItem_viewholder;
+import com.example.dbms.comment.comment_item;
 
 import java.util.ArrayList;
 

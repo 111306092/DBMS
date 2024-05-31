@@ -1,4 +1,4 @@
-package com.example.dbms;
+package com.example.dbms.drawer;
 
 public class drawer_item {
     String itemname;

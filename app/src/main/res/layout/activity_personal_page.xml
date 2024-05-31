@@ -6,7 +6,7 @@
     android:background="#E0F3C2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".personal_page">
+    tools:context=".pages.personal_page">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"

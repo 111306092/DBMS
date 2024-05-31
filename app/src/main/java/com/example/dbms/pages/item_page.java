@@ -1,4 +1,4 @@
-package com.example.dbms;
+package com.example.dbms.pages;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.dbms.R;
+import com.example.dbms.comment.commentItem_adapter;
+import com.example.dbms.comment.comment_item;
 
 import java.util.ArrayList;
 
@@ -55,7 +59,7 @@ public class item_page extends AppCompatActivity {
     }
 
     public void cart_click(View view){
-        Intent it = new Intent(item_page.this,cart_page.class);
+        Intent it = new Intent(item_page.this, cart_page.class);
         startActivity(it);
         finish();
     }
