@@ -85,12 +85,13 @@
 
                 <Button
                     android:id="@+id/startbutton"
-                    android:layout_width="wrap_content"
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="250dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="0dp"
-                    android:backgroundTint="#B0D83E"
+                    app:backgroundTint="@null"
+                    android:background="@drawable/buy_button"
                     android:onClick="startmap_click"
                     android:text="開始規劃路線"
                     android:textAlignment="center"
