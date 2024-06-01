@@ -70,6 +70,8 @@
                 android:background="@drawable/login_page_textarea"
                 android:ems="10"
                 android:inputType="textPassword"
+                android:maxLength="20"
+                android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
