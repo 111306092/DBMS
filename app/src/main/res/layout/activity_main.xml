@@ -34,173 +34,23 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="410dp"
-        android:layout_height="541dp"
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/southshop"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/MainFragment"
+            android:name="com.example.dbms.pages.MainFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="南部賣場"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.863"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.813" />
-
-        <TextView
-            android:id="@+id/centershop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="中部賣場"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.159"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.813" />
-
-        <TextView
-            android:id="@+id/northshop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="北部賣場"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.501"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.813" />
-
-        <HorizontalScrollView
-            android:layout_width="360dp"
-            android:layout_height="183dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.52"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.201">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/imageButton"
-                    android:layout_width="270dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:scaleType="centerInside"
-                    android:background="#E0F3C2"
-                    android:layout_gravity="left"
-                    app:srcCompat="@drawable/ad1" />
-
-                <ImageButton
-                    android:id="@+id/imageButton2"
-                    android:layout_width="270dp"
-                    android:scaleType="centerInside"
-                    android:background="#E0F3C2"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/ad2" />
-
-                <ImageButton
-                    android:id="@+id/imageButton3"
-                    android:layout_width="270dp"
-                    android:scaleType="centerInside"
-                    android:background="#E0F3C2"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/ad3" />
-            </LinearLayout>
-        </HorizontalScrollView>
-
-        <ImageButton
-            android:id="@+id/shop3"
-            android:layout_width="112dp"
-            android:layout_height="109dp"
-            android:backgroundTint="#E0F3C2"
-            android:onClick="shop_click"
-            android:scaleType="centerInside"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.919"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.724"
-            app:srcCompat="@drawable/shop3" />
-
-        <ImageButton
-            android:id="@+id/shop2"
-            android:layout_width="112dp"
-            android:layout_height="109dp"
-            android:backgroundTint="#E0F3C2"
-            android:onClick="shop_click"
-            android:scaleType="centerInside"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.724"
-            app:srcCompat="@drawable/shop2" />
-
-        <TextView
-            android:id="@+id/advertisement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="今日推薦"
-            android:textStyle="bold"
-            android:textSize="25sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.085"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.049" />
-
-        <TextView
-            android:id="@+id/choose"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="選擇商場"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.084"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.529" />
-
-        <ImageButton
-            android:id="@+id/shop1"
-            android:layout_width="112dp"
-            android:layout_height="109dp"
-            android:backgroundTint="#E0F3C2"
-            android:onClick="shop_click"
-            android:scaleType="centerInside"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.087"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.724"
-            app:srcCompat="@drawable/shop1" />
-
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

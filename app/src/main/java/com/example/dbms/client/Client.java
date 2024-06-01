@@ -19,7 +19,7 @@ public class Client {
     private String ip;
 
     public Client() {
-        ip = "192.168.124.83";
+        ip = "192.168.124.45";
         connected = false;
         input = "";
 
@@ -112,7 +112,7 @@ public class Client {
             try {
                 TimeUnit.MILLISECONDS.sleep(100);
             } catch (InterruptedException e1) {
-                Log.i("Debug", "Wait Interrupted");
+                Log.i("Debug", "sleep Interrupted");
             }
         }
 
@@ -133,9 +133,9 @@ public class Client {
 
         while (!update) {
             try {
-                TimeUnit.MILLISECONDS.wait(100);
+                TimeUnit.MILLISECONDS.sleep(100);
             } catch (InterruptedException e1) {
-                Log.i("Debug", "Wait Interrupted");
+                Log.i("Debug", "sleep Interrupted");
             }
         }
 
@@ -160,9 +160,9 @@ public class Client {
 
         while (!update) {
             try {
-                TimeUnit.MILLISECONDS.wait(100);
+                TimeUnit.MILLISECONDS.sleep(100);
             } catch (InterruptedException e1) {
-                Log.i("Debug", "Wait Interrupted");
+                Log.i("Debug", "sleep Interrupted");
             }
         }
 
@@ -175,9 +175,9 @@ public class Client {
 
         while (!update) {
             try {
-                TimeUnit.MILLISECONDS.wait(100);
+                TimeUnit.MILLISECONDS.sleep(100);
             } catch (InterruptedException e1) {
-                Log.i("Debug", "Wait Interrupted");
+                Log.i("Debug", "sleep Interrupted");
             }
         }
 
@@ -190,9 +190,9 @@ public class Client {
 
         while (!update) {
             try {
-                TimeUnit.MILLISECONDS.wait(100);
+                TimeUnit.MILLISECONDS.sleep(100);
             } catch (InterruptedException e1) {
-                Log.i("Debug", "Wait Interrupted");
+                Log.i("Debug", "sleep Interrupted");
             }
         }
 
@@ -210,9 +210,9 @@ public class Client {
 
         while (!update) {
             try {
-                TimeUnit.MILLISECONDS.wait(100);
+                TimeUnit.MILLISECONDS.sleep(100);
             } catch (InterruptedException e1) {
-                Log.i("Debug", "Wait Interrupted");
+                Log.i("Debug", "sleep Interrupted");
             }
         }
 
@@ -230,9 +230,9 @@ public class Client {
 
         while (!update) {
             try {
-                TimeUnit.MILLISECONDS.wait(100);
+                TimeUnit.MILLISECONDS.sleep(100);
             } catch (InterruptedException e1) {
-                Log.i("Debug", "Wait Interrupted");
+                Log.i("Debug", "sleep Interrupted");
             }
         }
 
@@ -245,9 +245,9 @@ public class Client {
 
         while (!update) {
             try {
-                TimeUnit.MILLISECONDS.wait(100);
+                TimeUnit.MILLISECONDS.sleep(100);
             } catch (InterruptedException e1) {
-                Log.i("Debug", "Wait Interrupted");
+                Log.i("Debug", "sleep Interrupted");
             }
         }
 
@@ -265,9 +265,9 @@ public class Client {
 
         while (!update) {
             try {
-                TimeUnit.MILLISECONDS.wait(100);
+                TimeUnit.MILLISECONDS.sleep(100);
             } catch (InterruptedException e1) {
-                Log.i("Debug", "Wait Interrupted");
+                Log.i("Debug", "sleep Interrupted");
             }
         }
 

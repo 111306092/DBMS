@@ -18,6 +18,8 @@ import com.example.dbms.client.Client;
 import com.example.dbms.client.ReconnectDialog;
 import com.example.dbms.client.UserErrorDialog;
 
+import java.util.concurrent.TimeUnit;
+
 public class login_page extends AppCompatActivity {
     private EditText accountText, passwordText;
     private Button registerButton, loginButton;
@@ -36,6 +38,15 @@ public class login_page extends AppCompatActivity {
         });
 
         client = new Client();
+
+        while (!client.getConnected()) {
+            try {
+                TimeUnit.MILLISECONDS.sleep(100);
+            } catch (InterruptedException e) {
+                Log.i("Debug", "Sleep Interrupted");
+            }
+        }
+
         dialog = new ReconnectDialog(client);
         check();
 
@@ -78,7 +89,7 @@ public class login_page extends AppCompatActivity {
                 client.close();
 
                 startActivity(it);
-                finish();
+                super.onDestroy();
             } else {
                 UserErrorDialog errorDialog = new UserErrorDialog("Login");
                 errorDialog.show(login_page.this.getFragmentManager(), "");
