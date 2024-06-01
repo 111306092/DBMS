@@ -7,6 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.dbms.R;
+import com.example.dbms.drawer.drawerItem_adapter;
+import com.example.dbms.drawer.drawer_item;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -72,6 +78,12 @@ public class MapFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        RecyclerView recyclerView = getView().findViewById(R.id.itemsinshelf);
+        ArrayList<drawer_item> items = new ArrayList<drawer_item>();
+        items.add(new drawer_item("1"));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        recyclerView.setAdapter(new drawerItem_adapter(this.getContext().getApplicationContext(),items));
 
         Button button = getView().findViewById(R.id.button);
         DrawerLayout drawerLayout = getView().findViewById(R.id.itemlist);

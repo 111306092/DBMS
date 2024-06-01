@@ -22,7 +22,6 @@ import com.example.dbms.drawer.drawer_item;
 import java.util.ArrayList;
 
 public class map extends AppCompatActivity {
-
     DrawerLayout drawerLayout;
     Button button;
     RecyclerView recyclerView;
@@ -47,16 +46,12 @@ public class map extends AppCompatActivity {
         drawerLayout = findViewById(R.id.itemlist);
         button = findViewById(R.id.button);
         button.setOnClickListener(new Button.OnClickListener(){
-
             @Override
             public void onClick(View v) {
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
     }
-
-
-
 
     public void personpage_click(View view){
         Intent it = new Intent(map.this,personal_page.class);

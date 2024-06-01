@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:autofillHints="密碼"
     android:background="#D3F59C"
     tools:context=".pages.login_page">
 
@@ -35,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/login_page_button"
-                android:onClick="what_click"
+                android:onClick="login_click"
                 android:text="登入"
                 android:textColor="@color/black"
                 android:textStyle="bold"
@@ -81,13 +82,13 @@
                 app:layout_constraintVertical_bias="0.437" />
 
             <EditText
-                android:id="@+id/ip_position"
+                android:id="@+id/UserName"
                 android:layout_width="224dp"
                 android:layout_height="46dp"
                 android:background="@drawable/login_page_textarea"
                 android:ems="10"
                 android:inputType="text"
-                android:text="IP位置"
+                android:text="自訂名稱(註冊用)"
                 android:textAlignment="center"
                 android:textColor="#000000"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -102,6 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/login_page_button"
+                android:onClick="register_click"
                 android:text="註冊"
                 android:textColor="@color/black"
                 android:textStyle="bold"

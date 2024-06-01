@@ -18,8 +18,10 @@ public class UserErrorDialog extends DialogFragment {
     public UserErrorDialog(String type) {
         if (type.equals("Login")) {
             errorMessage = "Account Doesn't Exist, Please Register";
-        } else {
+        } else if (type.equals("Register")) {
             errorMessage = "Account Exist, Please Login";
+        } else {
+            errorMessage = "Account Created, Please Login";
         }
     }
 

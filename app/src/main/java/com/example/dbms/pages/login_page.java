@@ -1,5 +1,8 @@
 package com.example.dbms.pages;
 
+import static android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD;
+import static android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,8 +24,7 @@ import com.example.dbms.client.UserErrorDialog;
 import java.util.concurrent.TimeUnit;
 
 public class login_page extends AppCompatActivity {
-    private EditText accountText, passwordText;
-    private Button registerButton, loginButton;
+    private EditText accountText, passwordText, usernameText;
     private Client client;
     private ReconnectDialog dialog;
 
@@ -52,9 +54,7 @@ public class login_page extends AppCompatActivity {
 
         accountText = findViewById(R.id.accountname);
         passwordText = findViewById(R.id.password);
-
-        loginButton = findViewById(R.id.login);
-        registerButton = findViewById(R.id.register);
+        usernameText = findViewById(R.id.UserName);
     }
 
     public void check() {
@@ -82,16 +82,33 @@ public class login_page extends AppCompatActivity {
         thread.start();
     }
 
-    public void what_click(View view){
+    public void login_click (View view){
         if (!accountText.getText().toString().isEmpty() && !passwordText.getText().toString().isEmpty()) {
-            if (client.getUser(accountText.getText().toString(),  passwordText.getText().toString())) {
+            String name = client.getUser(accountText.getText().toString(), passwordText.getText().toString());
+
+            if (!name.isEmpty()) {
                 Intent it = new Intent(login_page.this,MainActivity.class);
+                it.putExtra("UserID", accountText.getText().toString());
+                it.putExtra("Password", passwordText.getText().toString());
+                it.putExtra("Username", name);
                 client.close();
 
                 startActivity(it);
                 super.onDestroy();
             } else {
                 UserErrorDialog errorDialog = new UserErrorDialog("Login");
+                errorDialog.show(login_page.this.getFragmentManager(), "");
+            }
+        }
+    }
+
+    public void register_click(View view) {
+        if (!accountText.getText().toString().isEmpty() && !passwordText.getText().toString().isEmpty()) {
+            if (client.registerUser(accountText.getText().toString(),  passwordText.getText().toString(), usernameText.getText().toString())) {
+                UserErrorDialog errorDialog = new UserErrorDialog("Okay");
+                errorDialog.show(login_page.this.getFragmentManager(), "");
+            } else {
+                UserErrorDialog errorDialog = new UserErrorDialog("Register");
                 errorDialog.show(login_page.this.getFragmentManager(), "");
             }
         }

@@ -170,8 +170,8 @@ public class Client {
         update = false;
     }
 
-    public void registerUser(String userID, String password) {
-        sendOutput(String.format("registerUser/cmdend/%s/ADD/%s", userID, password));
+    public boolean registerUser(String userID, String password, String username) {
+        sendOutput(String.format("registerUser/cmdend/%s/ADD/%s/ADD/%s", userID, password, username));
 
         while (!update) {
             try {
@@ -181,8 +181,12 @@ public class Client {
             }
         }
 
+        boolean foundUser = input.equals("True");
+
         input = "";
         update = false;
+
+        return foundUser;
     }
 
     public ArrayList<String> getUserComments(String userID) {
@@ -260,7 +264,7 @@ public class Client {
         return carts;
     }
 
-    public boolean getUser(String userID, String password) {
+    public String getUser(String userID, String password) {
         sendOutput(String.format("getUser/cmdend/%s/ADD/%s", userID, password));
 
         while (!update) {
@@ -271,7 +275,11 @@ public class Client {
             }
         }
 
-        boolean foundUser = input.equals("True");
+        String foundUser = "";
+
+        if (!input.equals("NotFound")) {
+            foundUser = input;
+        }
 
         input = "";
         update = false;
