@@ -1,23 +1,33 @@
 package com.example.dbms.pages;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.GridLayout;
 
 import com.example.dbms.R;
+import com.example.dbms.client.Client;
 import com.example.dbms.drawer.drawerItem_adapter;
 import com.example.dbms.drawer.drawer_item;
+import com.example.dbms.map.Intersection;
+import com.example.dbms.map.Map;
+import com.example.dbms.map.MapElement;
+import com.example.dbms.map.Shelf;
+import com.example.dbms.map.Walkway;
 
 import java.util.ArrayList;
 
@@ -36,6 +46,14 @@ public class MapFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private String storeID;
+    private Map map;
+    private Client client;
+    private GridLayout gridLayout;
+    private DrawerLayout drawerLayout;
+    private int total_Row, total_Col;
+    private ArrayList<drawer_item> items;
+    private RecyclerView recyclerView;
 
     public MapFragment() {
         // Required empty public constructor
@@ -79,19 +97,91 @@ public class MapFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        RecyclerView recyclerView = getView().findViewById(R.id.itemsinshelf);
-        ArrayList<drawer_item> items = new ArrayList<drawer_item>();
+        recyclerView = getView().findViewById(R.id.itemsinshelf);
+        items = new ArrayList<drawer_item>();
         items.add(new drawer_item("1"));
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerView.setAdapter(new drawerItem_adapter(this.getContext().getApplicationContext(),items));
 
-        Button button = getView().findViewById(R.id.button);
-        DrawerLayout drawerLayout = getView().findViewById(R.id.itemlist);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawerLayout.openDrawer(GravityCompat.START);
+        client = ((MainActivity) getActivity()).client;
+        storeID = (((MainActivity) getActivity()).selectedStore);
+
+        map = new Map(client);
+        map.constructMap(storeID);
+
+        total_Row = Integer.parseInt(map.getStoreInfo()[0]);
+        total_Col = Integer.parseInt(map.getStoreInfo()[1]);
+
+        gridLayout = getView().findViewById(R.id.MapGrid);
+        gridLayout.setRowCount(total_Row);
+        gridLayout.setColumnCount(total_Col);
+
+        drawerLayout = getView().findViewById(R.id.itemlist);
+
+        constructMap();
+    }
+
+    private void constructMap() {
+        int i = 0;
+        for (MapElement[] li: map.getMapElements()) {
+            int j = 0;
+            for (MapElement mE: li) {
+                View v = new View(getActivity().getBaseContext());
+
+                if (mE instanceof Intersection) {
+                    v = getLayoutInflater().inflate(R.layout.intersection, null);
+                } else if (mE instanceof Shelf) {
+                    v = getLayoutInflater().inflate(R.layout.shelf, null);
+
+                    CardView cv = v.findViewById(R.id.ShelfCard);
+
+                    View finalV = v;
+                    cv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Log.i("Debug", "Triggered");
+                            //debugText.setText("Shelf Selected");
+                            int index = gridLayout.indexOfChild(finalV);
+                            int row = (int) Math.floor(index / total_Col);
+                            int col = index%total_Col;
+                            MapElement element = map.getMapElement(row, col);
+
+                            //Change after this
+                            //if (targetShelves.size() < 20 && !targetShelves.contains(element.getName())) {
+                                //targetShelves.add(element.getName());
+                            //}
+                            items = new ArrayList<>();
+
+                            for (String s: client.getProduct(element.getName().substring(1))) {
+                                items.add(new drawer_item(s));
+                            }
+                            ((drawerItem_adapter) recyclerView.getAdapter()).changeItems(items);
+                            recyclerView.getAdapter().notifyDataSetChanged();
+
+                            drawerLayout.openDrawer(GravityCompat.START);
+                        }
+                    });
+                } else if (mE instanceof Walkway) {
+                    if (((Walkway) mE).getAisle().getAisleRow() != -1) {
+                        v = getLayoutInflater().inflate(R.layout.horizontalwalkway, null);
+                    } else {
+                        v = getLayoutInflater().inflate(R.layout.vertcalwalkway, null);
+                    }
+                }
+
+                GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+
+                params.columnSpec = GridLayout.spec(j, 1, 1);
+                params.rowSpec = GridLayout.spec(i, 1, 1);
+
+                gridLayout.addView(v, params);
+
+                j++;
             }
-        });
+
+            i++;
+        }
     }
 }

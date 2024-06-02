@@ -37,4 +37,8 @@ public class drawerItem_adapter extends RecyclerView.Adapter<drawerItem_viewhold
     public int getItemCount() {
         return items.size();
     }
+
+    public void changeItems(ArrayList<drawer_item> items) {
+        this.items = items;
+    }
 }

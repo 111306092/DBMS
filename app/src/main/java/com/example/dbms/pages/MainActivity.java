@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     ReconnectDialog dialog;
     LogoutWarning warning;
     String user, username;
+    String selectedStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
             user = getIntent().getStringExtra("UserID");
             username = getIntent().getStringExtra("Username");
         }
+
+        selectedStore = "";
     }
 
     public void check() {
@@ -104,12 +107,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void map_click(View view){
-        FragmentManager manager = getSupportFragmentManager();
-        manager.beginTransaction()
-                .replace(R.id.MainFragment, MapFragment.class, null)
-                .setReorderingAllowed(true)
-                .addToBackStack("Map")
-                .commit();
+        if (!selectedStore.isEmpty()) {
+            FragmentManager manager = getSupportFragmentManager();
+            manager.beginTransaction()
+                    .replace(R.id.MainFragment, MapFragment.class, null)
+                    .setReorderingAllowed(true)
+                    .addToBackStack("Map")
+                    .commit();
+        }
     }
 
     public void cart_click(View view){
@@ -121,7 +126,31 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
-    public void shop_click(View view){
+    public void shop1_click(View view){
+        selectedStore = "1";
+
+        FragmentManager manager = getSupportFragmentManager();
+        manager.beginTransaction()
+                .replace(R.id.MainFragment, SearchFragment.class, null)
+                .setReorderingAllowed(true)
+                .addToBackStack("Search")
+                .commit();
+    }
+
+    public void shop2_click(View view){
+        selectedStore = "1";
+
+        FragmentManager manager = getSupportFragmentManager();
+        manager.beginTransaction()
+                .replace(R.id.MainFragment, SearchFragment.class, null)
+                .setReorderingAllowed(true)
+                .addToBackStack("Search")
+                .commit();
+    }
+
+    public void shop3_click(View view){
+        selectedStore = "1";
+
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction()
                 .replace(R.id.MainFragment, SearchFragment.class, null)

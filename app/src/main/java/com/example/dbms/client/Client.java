@@ -149,7 +149,7 @@ public class Client {
     }
 
     //getShelfProduct
-    public void getProduct(String shelfID) {
+    public ArrayList<String> getProduct(String shelfID) {
         sendOutput(String.format("getProducts/cmdend/%s", shelfID));
         //picture
         //name
@@ -166,8 +166,13 @@ public class Client {
             }
         }
 
+        ArrayList<String> products = new ArrayList<>();
+        products.addAll(Arrays.asList(input.split("/ADD/")));
+
         input = "";
         update = false;
+
+        return products;
     }
 
     public boolean registerUser(String userID, String password, String username) {

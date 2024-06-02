@@ -52,12 +52,15 @@ public class Map {
 
         //Put Shelves
         //Put wkwyLocation
+        Queue<String> shelfID = new LinkedList<>();
         Queue<int[]> wkwyLocationQueue = new LinkedList<>();
 
         for (String s: info[2].split("/ADD/")) {
             String[] temp = s.split(", ");
             int row = Integer.parseInt(temp[2]);
             int col = Integer.parseInt(temp[3]);
+
+            shelfID.add(temp[0]);
 
             int[] wkwyLocation = new int[2];
 
@@ -75,7 +78,6 @@ public class Map {
         }
 
         int itscCnt = 0;
-        int shelfCnt = 0;
 
         int row = 0;
         for (int[] li: mapMatrix) {
@@ -104,13 +106,13 @@ public class Map {
             for (int i: li) {
                 if (i == 2) {
                     int[] temp = wkwyLocationQueue.poll();
+                    String id = shelfID.poll();
 
                     assert temp != null;
                     Walkway w = (Walkway) mapElements[row + temp[0]][col + temp[1]];
-                    Shelf shelf = new Shelf("S" + shelfCnt, row, col, w, temp);
+                    Shelf shelf = new Shelf("S" + id, row, col, w, temp);
                     mapElements[row][col] = shelf;
                     shelves.add(shelf);
-                    shelfCnt++;
                 }
 
                 col++;
