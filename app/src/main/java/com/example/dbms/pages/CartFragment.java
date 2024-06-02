@@ -80,10 +80,14 @@ public class CartFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        MainActivity mainActivity = ((MainActivity) getActivity());
+
         Button pathButton = getView().findViewById(R.id.startbutton);
         pathButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mainActivity.setTargetShelves();
+
                 FragmentManager manager = getActivity().getSupportFragmentManager();
                 manager.beginTransaction()
                         .replace(R.id.MainFragment, MapFragment.class, null)
@@ -98,7 +102,7 @@ public class CartFragment extends Fragment {
         RecyclerView recyclerView = getView().findViewById(R.id.cartrecyclerview);
         ArrayList<cart_item> items = new ArrayList<cart_item>();
 
-        for (String s: ((MainActivity) getActivity()).targetItems) {
+        for (String s: targetItems) {
             items.add(new cart_item(s));
         }
 

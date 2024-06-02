@@ -20,7 +20,9 @@ import com.example.dbms.R;
 import com.example.dbms.client.Client;
 import com.example.dbms.client.LogoutWarning;
 import com.example.dbms.client.ReconnectDialog;
+import com.example.dbms.map.MapElement;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     String user, username;
     String selectedStore;
     ArrayList<String> targetItems;
+    ArrayList<String> targetShelves;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         dialog = new ReconnectDialog(client);
         warning = new LogoutWarning(this);
         targetItems = new ArrayList<>();
+        targetShelves = new ArrayList<>();
         selectedStore = "";
 
         String name = client.getUser(getIntent().getStringExtra("UserID"), getIntent().getStringExtra("Password"));
@@ -164,6 +168,14 @@ public class MainActivity extends AppCompatActivity {
                 .setReorderingAllowed(true)
                 .addToBackStack("Search")
                 .commit();
+    }
+
+    public void setTargetShelves() {
+        for (String s: targetItems) {
+            String[] temp = s.split(", ");
+
+            targetShelves.add("S" + client.getTargetShelf(selectedStore, temp[0]));
+        }
     }
 
     public void logout() {

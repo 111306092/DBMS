@@ -29,7 +29,9 @@ public class searchItem_viewholder extends RecyclerView.ViewHolder {
         checkbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                targetItems.add(itemname.getText().toString());
+                if (targetItems.size() < 20 && !targetItems.contains(itemname.getText().toString())) {
+                    targetItems.add(itemname.getText().toString());
+                }
             }
         });
     }

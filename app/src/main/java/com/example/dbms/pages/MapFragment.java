@@ -21,6 +21,7 @@ import android.widget.GridLayout;
 
 import com.example.dbms.R;
 import com.example.dbms.client.Client;
+import com.example.dbms.client.ReconnectDialog;
 import com.example.dbms.drawer.drawerItem_adapter;
 import com.example.dbms.drawer.drawer_item;
 import com.example.dbms.map.Intersection;
@@ -28,6 +29,7 @@ import com.example.dbms.map.Map;
 import com.example.dbms.map.MapElement;
 import com.example.dbms.map.Shelf;
 import com.example.dbms.map.Walkway;
+import com.example.dbms.route.Route;
 
 import java.util.ArrayList;
 
@@ -54,6 +56,8 @@ public class MapFragment extends Fragment {
     private int total_Row, total_Col;
     private ArrayList<drawer_item> items;
     private RecyclerView recyclerView;
+    private ArrayList<String> targetShelves;
+    private ReconnectDialog dialog;
 
     public MapFragment() {
         // Required empty public constructor
@@ -105,6 +109,8 @@ public class MapFragment extends Fragment {
 
         client = ((MainActivity) getActivity()).client;
         storeID = (((MainActivity) getActivity()).selectedStore);
+        targetShelves = ((MainActivity) getActivity()).targetShelves;
+        dialog = new ReconnectDialog(client);
 
         map = new Map(client);
         map.constructMap(storeID);
@@ -119,6 +125,8 @@ public class MapFragment extends Fragment {
         drawerLayout = getView().findViewById(R.id.itemlist);
 
         constructMap();
+
+        paintPath();
     }
 
     private void constructMap() {
@@ -146,10 +154,6 @@ public class MapFragment extends Fragment {
                             int col = index%total_Col;
                             MapElement element = map.getMapElement(row, col);
 
-                            //Change after this
-                            //if (targetShelves.size() < 20 && !targetShelves.contains(element.getName())) {
-                                //targetShelves.add(element.getName());
-                            //}
                             items = new ArrayList<>();
 
                             for (String s: client.getProduct(element.getName().substring(1))) {
@@ -182,6 +186,97 @@ public class MapFragment extends Fragment {
             }
 
             i++;
+        }
+    }
+
+    private void resetMap() {
+        for (MapElement[] li: map.getMapElements()) {
+            for (MapElement mE: li) {
+                View view = gridLayout.getChildAt(mE.getRow() * total_Col + mE.getCol());
+                CardView cv = view.findViewById(R.id.HorizontalWalkwayCard);
+
+                if (cv != null) {
+                    cv.setCardBackgroundColor(Color.GRAY);
+                } else {
+                    cv = view.findViewById(R.id.VerticalWalkwayCard);
+
+                    if (cv != null) {
+                        cv.setCardBackgroundColor(Color.GRAY);
+                    } else {
+                        cv = view.findViewById(R.id.IntersectionCard);
+
+                        if (cv != null) {
+                            cv.setCardBackgroundColor(Color.GRAY);
+                        } else {
+                            cv = view.findViewById(R.id.ShelfCard);
+                            cv.setCardBackgroundColor(Color.WHITE);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void paintPath() {
+        if (!targetShelves.isEmpty()) {
+            ArrayList<Shelf> order = new ArrayList<Shelf>();
+
+            try {
+                ArrayList<String> temp = client.getPath(targetShelves);
+
+                for (String s: temp) {
+                    MapElement mE = map.getMapElement(s);
+                    order.add((Shelf) mE);
+                }
+            } catch (Exception e) {
+                if (!dialog.isAdded()) {
+                    dialog.show(getActivity().getFragmentManager(), "Reconnect");
+                }
+            }
+
+            resetMap();
+            targetShelves.clear();
+
+            String testOutput = "";
+            for (Shelf s: order) {
+                testOutput += (s.getName() + "->");
+            }
+            for (Shelf s: order) {
+                int index = s.getRow() * total_Col + s.getCol();
+
+                View view = gridLayout.getChildAt(index);
+                CardView cv = view.findViewById(R.id.ShelfCard);
+                cv.setCardBackgroundColor(Color.RED);
+            }
+            //Send product list to back end to save it in the database
+            Route route = new Route(total_Row, total_Col, map.getStart(), map.getEnd(), order);
+
+            boolean[][] isRoute = route.getIsRoute();
+
+            for (int i = 0; i < total_Row; i++) {
+                for (int j = 0; j < total_Col; j++) {
+                    if (isRoute[i][j]) {
+                        View view = gridLayout.getChildAt(i * total_Col + j);
+                        CardView cv = view.findViewById(R.id.HorizontalWalkwayCard);
+
+                        if (cv != null) {
+                            cv.setCardBackgroundColor(Color.YELLOW);
+                        } else {
+                            cv = view.findViewById(R.id.VerticalWalkwayCard);
+
+                            if (cv != null) {
+                                cv.setCardBackgroundColor(Color.YELLOW);
+                            } else {
+                                cv = view.findViewById(R.id.IntersectionCard);
+
+                                if (cv != null) {
+                                    cv.setCardBackgroundColor(Color.YELLOW);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

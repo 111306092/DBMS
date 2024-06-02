@@ -195,6 +195,29 @@ public class Client {
         return products;
     }
 
+    public String getTargetShelf(String storeID, String productName) {
+        sendOutput(String.format("getTargetShelves/cmdend/%s/ADD/%s", storeID, productName));
+
+        for (int i = 0; i < 100 && !update; i++) {
+            try {
+                TimeUnit.MILLISECONDS.sleep(100);
+            } catch (InterruptedException e1) {
+                Log.i("Debug", "sleep Interrupted");
+            }
+        }
+
+        String targetShelf = "";
+
+        if (!input.equals("NotFound")) {
+            targetShelf = input;
+        }
+
+        input = "";
+        update = false;
+
+        return targetShelf;
+    }
+
     public boolean registerUser(String userID, String password, String username) {
         sendOutput(String.format("registerUser/cmdend/%s/ADD/%s/ADD/%s", userID, password, username));
 
