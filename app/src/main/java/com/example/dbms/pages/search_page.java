@@ -37,7 +37,7 @@ public class search_page extends AppCompatActivity {
         ArrayList<search_item> items = new ArrayList<search_item>();
         items.add(new search_item("1"));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new searchItem_adapter(getApplicationContext(),items));
+        recyclerView.setAdapter(new searchItem_adapter(getApplicationContext(),items, new ArrayList<>()));
     }
 
     public void personpage_click(View view){

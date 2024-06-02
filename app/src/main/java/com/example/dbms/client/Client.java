@@ -108,7 +108,7 @@ public class Client {
     public String[] getStoreInfo(String storeID) {
         sendOutput(String.format("getStoreInfo/cmdend/%s", storeID));
 
-        while (!update) {
+        for (int i = 0; i < 100 && !update; i++) {
             try {
                 TimeUnit.MILLISECONDS.sleep(100);
             } catch (InterruptedException e1) {
@@ -131,7 +131,7 @@ public class Client {
         }
         sendOutput(String.format("calculatePath/cmdend/%s", temp));
 
-        while (!update) {
+        for (int i = 0; i < 100 && !update; i++) {
             try {
                 TimeUnit.MILLISECONDS.sleep(100);
             } catch (InterruptedException e1) {
@@ -158,7 +158,27 @@ public class Client {
         //comments
         //storeID
 
-        while (!update) {
+        for (int i = 0; i < 100 && !update; i++) {
+            try {
+                TimeUnit.MILLISECONDS.sleep(100);
+            } catch (InterruptedException e1) {
+                Log.i("Debug", "sleep Interrupted");
+            }
+        }
+
+        ArrayList<String> products = new ArrayList<>();
+        products.addAll(Arrays.asList(input.split("/ADD/")));
+
+        input = "";
+        update = false;
+
+        return products;
+    }
+
+    public ArrayList<String> getStoreProducts(String storeID) {
+        sendOutput(String.format("getStoreProducts/cmdend/%s", storeID));
+
+        for (int i = 0; i < 100 && !update; i++) {
             try {
                 TimeUnit.MILLISECONDS.sleep(100);
             } catch (InterruptedException e1) {
@@ -178,7 +198,7 @@ public class Client {
     public boolean registerUser(String userID, String password, String username) {
         sendOutput(String.format("registerUser/cmdend/%s/ADD/%s/ADD/%s", userID, password, username));
 
-        while (!update) {
+        for (int i = 0; i < 100 && !update; i++) {
             try {
                 TimeUnit.MILLISECONDS.sleep(100);
             } catch (InterruptedException e1) {
@@ -197,7 +217,7 @@ public class Client {
     public ArrayList<String> getUserComments(String userID) {
         sendOutput(String.format("getUserComments/cmdend/%s", userID));
 
-        while (!update) {
+        for (int i = 0; i < 100 && !update; i++) {
             try {
                 TimeUnit.MILLISECONDS.sleep(100);
             } catch (InterruptedException e1) {
@@ -217,7 +237,7 @@ public class Client {
     public ArrayList<String> getProductComments(String productID) {
         sendOutput(String.format("getProductComments/cmdend/%s", productID));
 
-        while (!update) {
+        for (int i = 0; i < 100 && !update; i++) {
             try {
                 TimeUnit.MILLISECONDS.sleep(100);
             } catch (InterruptedException e1) {
@@ -237,7 +257,7 @@ public class Client {
     public void writeComments(String userID, String product, String comment) {
         sendOutput(String.format("writeComments/cmdend/%s/ADD/%s/ADD/%s", product, userID, comment));
 
-        while (!update) {
+        for (int i = 0; i < 100 && !update; i++) {
             try {
                 TimeUnit.MILLISECONDS.sleep(100);
             } catch (InterruptedException e1) {
@@ -252,7 +272,7 @@ public class Client {
     public ArrayList<String> getHistoryCart(String userID) {
         sendOutput(String.format("getHistoryCart/cmdend/%s", userID));
 
-        while (!update) {
+        for (int i = 0; i < 100 && !update; i++) {
             try {
                 TimeUnit.MILLISECONDS.sleep(100);
             } catch (InterruptedException e1) {
@@ -272,7 +292,7 @@ public class Client {
     public String getUser(String userID, String password) {
         sendOutput(String.format("getUser/cmdend/%s/ADD/%s", userID, password));
 
-        while (!update) {
+        for (int i = 0; i < 100 && !update; i++) {
             try {
                 TimeUnit.MILLISECONDS.sleep(100);
             } catch (InterruptedException e1) {

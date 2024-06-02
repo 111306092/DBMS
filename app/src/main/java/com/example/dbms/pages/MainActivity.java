@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ import com.example.dbms.client.Client;
 import com.example.dbms.client.LogoutWarning;
 import com.example.dbms.client.ReconnectDialog;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     LogoutWarning warning;
     String user, username;
     String selectedStore;
+    ArrayList<String> targetItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
 
         dialog = new ReconnectDialog(client);
         warning = new LogoutWarning(this);
-        check();
+        targetItems = new ArrayList<>();
+        selectedStore = "";
 
         String name = client.getUser(getIntent().getStringExtra("UserID"), getIntent().getStringExtra("Password"));
         if (!name.equals("NotFound")) {
@@ -60,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             username = getIntent().getStringExtra("Username");
         }
 
-        selectedStore = "";
+        check();
     }
 
     public void check() {
@@ -128,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void shop1_click(View view){
         selectedStore = "1";
+        targetItems.clear();
 
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction()
@@ -139,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void shop2_click(View view){
         selectedStore = "1";
+        targetItems.clear();
 
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction()
@@ -150,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void shop3_click(View view){
         selectedStore = "1";
+        targetItems.clear();
 
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction()

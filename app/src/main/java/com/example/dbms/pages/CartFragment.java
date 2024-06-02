@@ -36,6 +36,7 @@ public class CartFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ArrayList<String> targetItems;
 
     public CartFragment() {
         // Required empty public constructor
@@ -92,10 +93,16 @@ public class CartFragment extends Fragment {
             }
         });
 
+        targetItems = ((MainActivity) getActivity()).targetItems;
+
         RecyclerView recyclerView = getView().findViewById(R.id.cartrecyclerview);
         ArrayList<cart_item> items = new ArrayList<cart_item>();
-        items.add(new cart_item("1"));
+
+        for (String s: ((MainActivity) getActivity()).targetItems) {
+            items.add(new cart_item(s));
+        }
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        recyclerView.setAdapter(new cartItem_adapter(this.getContext().getApplicationContext(),items));
+        recyclerView.setAdapter(new cartItem_adapter(this.getContext().getApplicationContext(),items, targetItems));
     }
 }

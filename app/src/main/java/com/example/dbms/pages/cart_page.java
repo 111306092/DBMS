@@ -37,7 +37,7 @@ public class cart_page extends AppCompatActivity {
         ArrayList<cart_item> items = new ArrayList<cart_item>();
         items.add(new cart_item("1"));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new cartItem_adapter(getApplicationContext(),items));
+        recyclerView.setAdapter(new cartItem_adapter(getApplicationContext(),items, new ArrayList<>()));
     }
 
     public void personpage_click(View view){

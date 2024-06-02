@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.dbms.R;
+import com.example.dbms.client.Client;
 import com.example.dbms.search_item.searchItem_adapter;
 import com.example.dbms.search_item.search_item;
 
@@ -33,6 +34,10 @@ public class SearchFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private Client client;
+    private String selectedStore;
+    private ArrayList<String> targetItems;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -76,10 +81,20 @@ public class SearchFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        client = ((MainActivity) getActivity()).client;
+        selectedStore = ((MainActivity) getActivity()).selectedStore;
+
+        targetItems = ((MainActivity) getActivity()).targetItems;
+
         RecyclerView recyclerView = getView().findViewById(R.id.search_recyclerview);
         ArrayList<search_item> items = new ArrayList<search_item>();
-        items.add(new search_item("1"));
+
+
+        for (String s: client.getStoreProducts(selectedStore)) {
+            items.add(new search_item(s));
+        }
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        recyclerView.setAdapter(new searchItem_adapter(this.getContext().getApplicationContext(),items));
+        recyclerView.setAdapter(new searchItem_adapter(this.getContext().getApplicationContext(),items, targetItems));
     }
 }
