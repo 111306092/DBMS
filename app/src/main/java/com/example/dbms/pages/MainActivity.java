@@ -20,7 +20,9 @@ import com.example.dbms.R;
 import com.example.dbms.client.Client;
 import com.example.dbms.client.LogoutWarning;
 import com.example.dbms.client.ReconnectDialog;
+import com.example.dbms.map.Map;
 import com.example.dbms.map.MapElement;
+import com.example.dbms.map.Shelf;
 
 import java.sql.Array;
 import java.util.ArrayList;
@@ -34,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
     String selectedStore;
     ArrayList<String> targetItems;
     ArrayList<String> targetShelves;
+    ArrayList<Shelf> order;
+    Map map;
+    boolean mapUpdated;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         client = new Client();
+        map = new Map(client);
+        mapUpdated = true;
 
         while (!client.getConnected()) {
             try {
@@ -60,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         warning = new LogoutWarning(this);
         targetItems = new ArrayList<>();
         targetShelves = new ArrayList<>();
+        order = new ArrayList<>();
         selectedStore = "";
 
         String name = client.getUser(getIntent().getStringExtra("UserID"), getIntent().getStringExtra("Password"));
@@ -137,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
     public void shop1_click(View view){
         selectedStore = "1";
         targetItems.clear();
+        map.constructMap(selectedStore);
 
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction()
@@ -149,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
     public void shop2_click(View view){
         selectedStore = "1";
         targetItems.clear();
+        map.constructMap(selectedStore);
 
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction()
@@ -161,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
     public void shop3_click(View view){
         selectedStore = "1";
         targetItems.clear();
+        map.constructMap(selectedStore);
 
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction()
@@ -171,11 +182,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setTargetShelves() {
+        targetShelves.clear();
+        order.clear();
+
         for (String s: targetItems) {
             String[] temp = s.split(", ");
 
             targetShelves.add("S" + client.getTargetShelf(selectedStore, temp[0]));
         }
+
+        mapUpdated = false;
     }
 
     public void logout() {

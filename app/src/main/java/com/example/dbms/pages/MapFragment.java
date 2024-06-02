@@ -49,7 +49,7 @@ public class MapFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private String storeID;
-    private Map map;
+    //private Map map;
     private Client client;
     private GridLayout gridLayout;
     private DrawerLayout drawerLayout;
@@ -58,6 +58,7 @@ public class MapFragment extends Fragment {
     private RecyclerView recyclerView;
     private ArrayList<String> targetShelves;
     private ReconnectDialog dialog;
+    private Map map;
 
     public MapFragment() {
         // Required empty public constructor
@@ -111,9 +112,7 @@ public class MapFragment extends Fragment {
         storeID = (((MainActivity) getActivity()).selectedStore);
         targetShelves = ((MainActivity) getActivity()).targetShelves;
         dialog = new ReconnectDialog(client);
-
-        map = new Map(client);
-        map.constructMap(storeID);
+        map = ((MainActivity) getActivity()).map;
 
         total_Row = Integer.parseInt(map.getStoreInfo()[0]);
         total_Col = Integer.parseInt(map.getStoreInfo()[1]);
@@ -219,23 +218,26 @@ public class MapFragment extends Fragment {
 
     private void paintPath() {
         if (!targetShelves.isEmpty()) {
-            ArrayList<Shelf> order = new ArrayList<Shelf>();
+            ArrayList<Shelf> order = ((MainActivity) getActivity()).order;
 
-            try {
-                ArrayList<String> temp = client.getPath(targetShelves);
+            if (!((MainActivity) getActivity()).mapUpdated) {
+                try {
+                    ArrayList<String> temp = client.getPath(targetShelves);
 
-                for (String s: temp) {
-                    MapElement mE = map.getMapElement(s);
-                    order.add((Shelf) mE);
-                }
-            } catch (Exception e) {
-                if (!dialog.isAdded()) {
-                    dialog.show(getActivity().getFragmentManager(), "Reconnect");
+                    for (String s: temp) {
+                        MapElement mE = map.getMapElement(s);
+                        order.add((Shelf) mE);
+                    }
+
+                    ((MainActivity) getActivity()).mapUpdated = true;
+                } catch (Exception e) {
+                    if (!dialog.isAdded()) {
+                        dialog.show(getActivity().getFragmentManager(), "Reconnect");
+                    }
                 }
             }
 
             resetMap();
-            targetShelves.clear();
 
             String testOutput = "";
             for (Shelf s: order) {
