@@ -41,7 +41,7 @@ public class login_page extends AppCompatActivity {
 
         client = new Client();
 
-        while (!client.getConnected()) {
+        for (int i = 0; i < 10 && !client.getConnected(); i++) {
             try {
                 TimeUnit.MILLISECONDS.sleep(100);
             } catch (InterruptedException e) {
