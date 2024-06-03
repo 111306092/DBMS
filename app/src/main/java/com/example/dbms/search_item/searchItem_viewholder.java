@@ -9,9 +9,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dbms.R;
+import com.example.dbms.comment.commentItem_adapter;
+import com.example.dbms.comment.comment_item;
 import com.example.dbms.pages.SearchFragment;
 
 import java.lang.reflect.Array;
@@ -63,6 +66,18 @@ public class searchItem_viewholder extends RecyclerView.ViewHolder {
 
                 TextView des = fragment.getView().findViewById(R.id.iteminfo);
                 des.setText(temp[2]);
+
+                RecyclerView commentView = fragment.getView().findViewById(R.id.com_recyclerview);
+                ArrayList<comment_item> items = new ArrayList<>();
+
+                for (String s: fragment.getProductComments(name.getText().toString())) {
+                    if (!s.equals("NotFound")) {
+                        items.add(new comment_item(name.getText().toString(), s));
+                    }
+                }
+
+                commentView.setLayoutManager(new LinearLayoutManager(fragment.getContext()));
+                commentView.setAdapter(new commentItem_adapter(fragment.getContext().getApplicationContext(),items));
 
                 drawerLayout.openDrawer(GravityCompat.START);
             }

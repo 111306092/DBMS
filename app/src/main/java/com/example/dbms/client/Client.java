@@ -257,8 +257,8 @@ public class Client {
         return comments;
     }
 
-    public ArrayList<String> getProductComments(String productID) {
-        sendOutput(String.format("getProductComments/cmdend/%s", productID));
+    public ArrayList<String> getProductComments(String productName, String storeID) {
+        sendOutput(String.format("getProductComments/cmdend/%s/ADD/%s", productName, storeID));
 
         for (int i = 0; i < 100 && !update; i++) {
             try {

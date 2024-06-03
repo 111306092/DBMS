@@ -100,4 +100,12 @@ public class SearchFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerView.setAdapter(new searchItem_adapter(this.getContext().getApplicationContext(),items, targetItems, drawerLayout, this));
     }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public ArrayList<String> getProductComments(String name) {
+        return client.getProductComments(name, ((MainActivity) getActivity()).selectedStore);
+    }
 }
