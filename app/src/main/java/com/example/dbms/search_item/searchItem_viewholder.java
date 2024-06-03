@@ -1,5 +1,6 @@
 package com.example.dbms.search_item;
 
+import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -48,8 +49,18 @@ public class searchItem_viewholder extends RecyclerView.ViewHolder {
 
                 TextView name = fragment.getView().findViewById(R.id.itemname);
                 name.setText(temp[0]);
+
                 TextView price = fragment.getView().findViewById(R.id.itemprice);
+                if (!temp[3].equals("0")) {
+                    int p = Integer.parseInt(temp[1]) - Integer.parseInt(temp[3]);
+                    temp[1] = String.valueOf(p);
+
+                    price.setTextColor(Color.RED);
+                } else {
+                    price.setTextColor(Color.BLACK);
+                }
                 price.setText(String.format("NT$ %s", temp[1]));
+
                 TextView des = fragment.getView().findViewById(R.id.iteminfo);
                 des.setText(temp[2]);
 

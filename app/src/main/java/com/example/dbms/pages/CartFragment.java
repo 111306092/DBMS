@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.dbms.R;
 import com.example.dbms.cart.cartItem_adapter;
@@ -108,5 +109,8 @@ public class CartFragment extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerView.setAdapter(new cartItem_adapter(this.getContext().getApplicationContext(),items, targetItems));
+
+        TextView tv = getView().findViewById(R.id.carttitle);
+        tv.setText(String.format("您的購物車內目前有%d項商品", targetItems.size()));
     }
 }
