@@ -99,6 +99,6 @@ public class SearchFragment extends Fragment {
         drawerLayout = getView().findViewById(R.id.productList);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        recyclerView.setAdapter(new searchItem_adapter(this.getContext().getApplicationContext(),items, targetItems, drawerLayout));
+        recyclerView.setAdapter(new searchItem_adapter(this.getContext().getApplicationContext(),items, targetItems, drawerLayout, this));
     }
 }

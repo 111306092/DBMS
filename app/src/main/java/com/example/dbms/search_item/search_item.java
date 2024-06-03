@@ -10,7 +10,6 @@ public class search_item  {
     }
 
     public String getItemname(){
-        this.itemname=itemname;
         return itemname;
     }
 

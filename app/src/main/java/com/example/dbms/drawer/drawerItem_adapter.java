@@ -29,7 +29,8 @@ public class drawerItem_adapter extends RecyclerView.Adapter<drawerItem_viewhold
 
     @Override
     public void onBindViewHolder(@NonNull drawerItem_viewholder holder, int position) {
-        holder.getItemname().setText(items.get(position).getItemname());
+        String[] temp = items.get(position).getItemname().split("/AND/");
+        holder.getItemname().setText(temp[0]);
 
     }
 

@@ -10,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dbms.R;
+import com.example.dbms.pages.SearchFragment;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -20,24 +21,29 @@ public class searchItem_adapter extends RecyclerView.Adapter<searchItem_viewhold
     private ArrayList<search_item> items;
     private ArrayList<String> targetItems;
     private DrawerLayout drawerLayout;
+    private SearchFragment fragment;
 
-    public searchItem_adapter(Context con, ArrayList<search_item> items, ArrayList<String> targetItems, DrawerLayout drawerLayout){
+    public searchItem_adapter(Context con, ArrayList<search_item> items, ArrayList<String> targetItems, DrawerLayout drawerLayout, SearchFragment fragment){
         this.con = con;
         this.items = items;
         this.targetItems = targetItems;
         this.drawerLayout = drawerLayout;
+        this.fragment = fragment;
     }
 
     @NonNull
     @Override
     public searchItem_viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemview = LayoutInflater.from(con).inflate(R.layout.search_item,parent,false);
-        return new searchItem_viewholder(itemview, targetItems, drawerLayout);
+        return new searchItem_viewholder(itemview, targetItems, fragment, drawerLayout);
     }
 
     @Override
     public void onBindViewHolder(@NonNull searchItem_viewholder holder, int position) {
-        holder.getItemname().setText(items.get(position).getItemname());
+        holder.setProductInfo(items.get(position).getItemname());
+        String[] temp = items.get(position).getItemname().split("/AND/");
+
+        holder.getItemname().setText(temp[0]);
     }
 
     @Override
