@@ -25,16 +25,18 @@ public class searchItem_viewholder extends RecyclerView.ViewHolder {
     private TextView itemname;
     private ImageButton itemphoto;
     private Button checkbutton;
+    private ArrayList<String> targetItems;
 
     String productInfo;
 
-    public searchItem_viewholder(@NonNull View itemView, ArrayList<String> targetItems, SearchFragment fragment, DrawerLayout drawerLayout){
+    public searchItem_viewholder(@NonNull View itemView, SearchFragment fragment){
         super(itemView);
         itemname = itemView.findViewById(R.id.search_itemname);
         itemphoto = itemView.findViewById(R.id.info_button);
         checkbutton = itemView.findViewById(R.id.search_button);
-
         productInfo = "";
+
+        this.targetItems = fragment.getTargetItems();
 
         checkbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,38 +50,7 @@ public class searchItem_viewholder extends RecyclerView.ViewHolder {
         itemphoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String[] temp = productInfo.split("/AND/");
-
-                TextView name = fragment.getView().findViewById(R.id.itemname);
-                name.setText(temp[0]);
-
-                TextView price = fragment.getView().findViewById(R.id.itemprice);
-                if (!temp[3].equals("0")) {
-                    int p = Integer.parseInt(temp[1]) - Integer.parseInt(temp[3]);
-                    temp[1] = String.valueOf(p);
-
-                    price.setTextColor(Color.RED);
-                } else {
-                    price.setTextColor(Color.BLACK);
-                }
-                price.setText(String.format("NT$ %s", temp[1]));
-
-                TextView des = fragment.getView().findViewById(R.id.iteminfo);
-                des.setText(temp[2]);
-
-                RecyclerView commentView = fragment.getView().findViewById(R.id.com_recyclerview);
-                ArrayList<comment_item> items = new ArrayList<>();
-
-                for (String s: fragment.getProductComments(name.getText().toString())) {
-                    if (!s.equals("NotFound")) {
-                        items.add(new comment_item(name.getText().toString(), s));
-                    }
-                }
-
-                commentView.setLayoutManager(new LinearLayoutManager(fragment.getContext()));
-                commentView.setAdapter(new commentItem_adapter(fragment.getContext().getApplicationContext(),items));
-
-                drawerLayout.openDrawer(GravityCompat.START);
+                fragment.generateDrawerLayout(productInfo);
             }
         });
     }

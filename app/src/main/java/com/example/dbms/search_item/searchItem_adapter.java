@@ -19,15 +19,11 @@ public class searchItem_adapter extends RecyclerView.Adapter<searchItem_viewhold
 
     private Context con;
     private ArrayList<search_item> items;
-    private ArrayList<String> targetItems;
-    private DrawerLayout drawerLayout;
     private SearchFragment fragment;
 
-    public searchItem_adapter(Context con, ArrayList<search_item> items, ArrayList<String> targetItems, DrawerLayout drawerLayout, SearchFragment fragment){
+    public searchItem_adapter(Context con, ArrayList<search_item> items, SearchFragment fragment){
         this.con = con;
         this.items = items;
-        this.targetItems = targetItems;
-        this.drawerLayout = drawerLayout;
         this.fragment = fragment;
     }
 
@@ -35,7 +31,7 @@ public class searchItem_adapter extends RecyclerView.Adapter<searchItem_viewhold
     @Override
     public searchItem_viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemview = LayoutInflater.from(con).inflate(R.layout.search_item,parent,false);
-        return new searchItem_viewholder(itemview, targetItems, fragment, drawerLayout);
+        return new searchItem_viewholder(itemview, fragment);
     }
 
     @Override

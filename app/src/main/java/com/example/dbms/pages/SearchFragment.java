@@ -1,9 +1,11 @@
 package com.example.dbms.pages;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,9 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.dbms.R;
 import com.example.dbms.client.Client;
+import com.example.dbms.comment.commentItem_adapter;
+import com.example.dbms.comment.comment_item;
 import com.example.dbms.search_item.searchItem_adapter;
 import com.example.dbms.search_item.search_item;
 
@@ -98,7 +105,7 @@ public class SearchFragment extends Fragment {
         drawerLayout = getView().findViewById(R.id.productList);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        recyclerView.setAdapter(new searchItem_adapter(this.getContext().getApplicationContext(),items, targetItems, drawerLayout, this));
+        recyclerView.setAdapter(new searchItem_adapter(this.getContext().getApplicationContext(),items, this));
     }
 
     public Client getClient() {
@@ -107,5 +114,65 @@ public class SearchFragment extends Fragment {
 
     public ArrayList<String> getProductComments(String name) {
         return client.getProductComments(name, ((MainActivity) getActivity()).selectedStore);
+    }
+
+    public DrawerLayout getDrawerLayout() {
+        return drawerLayout;
+    }
+
+    public ArrayList<String> getTargetItems() {
+        return targetItems;
+    }
+
+    public void generateDrawerLayout(String productInfo) {
+        //The Labels
+        String[] temp = productInfo.split("/AND/");
+
+        TextView name = getView().findViewById(R.id.itemname);
+        name.setText(temp[0]);
+
+        TextView price = getView().findViewById(R.id.itemprice);
+        if (!temp[3].equals("0")) {
+            int p = Integer.parseInt(temp[1]) - Integer.parseInt(temp[3]);
+            temp[1] = String.valueOf(p);
+
+            price.setTextColor(Color.RED);
+        } else {
+            price.setTextColor(Color.BLACK);
+        }
+        price.setText(String.format("NT$ %s", temp[1]));
+
+        TextView des = getView().findViewById(R.id.iteminfo);
+        des.setText(temp[2]);
+
+        //The Comments
+        RecyclerView commentView = getView().findViewById(R.id.com_recyclerview);
+        ArrayList<comment_item> items = new ArrayList<>();
+
+        for (String s: getProductComments(name.getText().toString())) {
+            if (!s.equals("NotFound")) {
+                items.add(new comment_item(name.getText().toString(), s));
+            }
+        }
+
+        commentView.setLayoutManager(new LinearLayoutManager(getContext()));
+        commentView.setAdapter(new commentItem_adapter(getContext().getApplicationContext(),items));
+
+        //Write Comment
+        EditText mycomment = getView().findViewById(R.id.mycomment);
+        Button sendComment = getView().findViewById(R.id.sendbutton);
+        sendComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!mycomment.getText().toString().isEmpty()) {
+                    client.writeComments(((MainActivity) getActivity()).user, temp[0], selectedStore, mycomment.getText().toString());
+
+                    mycomment.setText("");
+                    mycomment.clearFocus();
+                }
+            }
+        });
+
+        getDrawerLayout().openDrawer(GravityCompat.START);
     }
 }

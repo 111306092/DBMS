@@ -277,8 +277,8 @@ public class Client {
         return comments;
     }
 
-    public void writeComments(String userID, String product, String comment) {
-        sendOutput(String.format("writeComments/cmdend/%s/ADD/%s/ADD/%s", product, userID, comment));
+    public void writeComments(String userID, String product, String storeID, String comment) {
+        sendOutput(String.format("writeComment/cmdend/%s/ADD/%s/ADD/%s/ADD/%s", userID, product, storeID, comment));
 
         for (int i = 0; i < 100 && !update; i++) {
             try {
@@ -310,6 +310,27 @@ public class Client {
         update = false;
 
         return carts;
+    }
+
+    public void updateHistoryCart(String userID, ArrayList<String> values) {
+        String temp = String.format("updateHistoryCart/cmdend/%s/ADD/", userID);
+
+        for (String s: values) {
+            temp += String.format("%s/ADD/", s);
+        }
+
+        sendOutput(temp);
+
+        for (int i = 0; i < 100 && !update; i++) {
+            try {
+                TimeUnit.MILLISECONDS.sleep(100);
+            } catch (InterruptedException e1) {
+                Log.i("Debug", "sleep Interrupted");
+            }
+        }
+
+        input = "";
+        update = false;
     }
 
     public String getUser(String userID, String password) {
