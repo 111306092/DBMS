@@ -18,6 +18,24 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.99">
 
+        <EditText
+            android:id="@+id/ipaddress"
+            android:layout_width="250dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/login_page_textarea"
+            android:ems="10"
+            android:hint="IP地址"
+            android:inputType="text"
+            android:text="192.168.40.128"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </EditText>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout4"
             android:layout_width="match_parent"
@@ -50,12 +68,12 @@
 
             <EditText
                 android:id="@+id/accountname"
-                android:layout_width="224dp"
-                android:layout_height="46dp"
+                android:layout_width="250dp"
+                android:layout_height="48dp"
                 android:background="@drawable/login_page_textarea"
                 android:ems="10"
+                android:hint="帳號"
                 android:inputType="text"
-                android:text="帳號"
                 android:textAlignment="center"
                 android:textColor="#000000"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -67,10 +85,11 @@
 
             <EditText
                 android:id="@+id/password"
-                android:layout_width="223dp"
-                android:layout_height="44dp"
+                android:layout_width="250dp"
+                android:layout_height="48dp"
                 android:background="@drawable/login_page_textarea"
                 android:ems="10"
+                android:hint="密碼"
                 android:inputType="textPassword"
                 android:maxLength="20"
                 android:textAlignment="center"
@@ -83,12 +102,12 @@
 
             <EditText
                 android:id="@+id/UserName"
-                android:layout_width="224dp"
-                android:layout_height="46dp"
+                android:layout_width="250dp"
+                android:layout_height="48dp"
                 android:background="@drawable/login_page_textarea"
                 android:ems="10"
+                android:hint="用戶名(註冊用)"
                 android:inputType="text"
-                android:text="自訂名稱(註冊用)"
                 android:textAlignment="center"
                 android:textColor="#000000"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -18,8 +18,8 @@ public class Client {
     private boolean connected, update;
     private String ip;
 
-    public Client() {
-        ip = "192.168.124.45";
+    public Client(String ip) {
+        this.ip = ip;
         connected = false;
         input = "";
 

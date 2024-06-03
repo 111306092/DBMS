@@ -6,6 +6,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dbms.R;
@@ -20,7 +22,7 @@ public class searchItem_viewholder extends RecyclerView.ViewHolder {
     private Button checkbutton;
     private ArrayList<String> targetItems;
 
-    public searchItem_viewholder(@NonNull View itemView, ArrayList<String> targetItems){
+    public searchItem_viewholder(@NonNull View itemView, ArrayList<String> targetItems, DrawerLayout drawerLayout){
         super(itemView);
         this.targetItems = targetItems;
         itemname = itemView.findViewById(R.id.search_itemname);
@@ -32,6 +34,13 @@ public class searchItem_viewholder extends RecyclerView.ViewHolder {
                 if (targetItems.size() < 20 && !targetItems.contains(itemname.getText().toString())) {
                     targetItems.add(itemname.getText().toString());
                 }
+            }
+        });
+
+        itemphoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(GravityCompat.START);
             }
         });
     }

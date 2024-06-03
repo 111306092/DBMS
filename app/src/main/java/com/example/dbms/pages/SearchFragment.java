@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,6 +39,7 @@ public class SearchFragment extends Fragment {
     private Client client;
     private String selectedStore;
     private ArrayList<String> targetItems;
+    private DrawerLayout drawerLayout;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -94,7 +96,9 @@ public class SearchFragment extends Fragment {
             items.add(new search_item(s));
         }
 
+        drawerLayout = getView().findViewById(R.id.productList);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        recyclerView.setAdapter(new searchItem_adapter(this.getContext().getApplicationContext(),items, targetItems));
+        recyclerView.setAdapter(new searchItem_adapter(this.getContext().getApplicationContext(),items, targetItems, drawerLayout));
     }
 }

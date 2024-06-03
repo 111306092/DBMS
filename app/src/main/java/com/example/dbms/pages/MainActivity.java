@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        client = new Client();
+        client = new Client(getIntent().getStringExtra("IP"));
         map = new Map(client);
         mapUpdated = true;
 
@@ -143,9 +143,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void shop1_click(View view){
-        selectedStore = "1";
-        targetItems.clear();
-        map.constructMap(selectedStore);
+        if (!selectedStore.equals("1")) {
+            selectedStore = "1";
+            targetItems.clear();
+            map.constructMap(selectedStore);
+        }
 
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction()
@@ -156,9 +158,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void shop2_click(View view){
-        selectedStore = "1";
-        targetItems.clear();
-        map.constructMap(selectedStore);
+        if (!selectedStore.equals("1")) {
+            selectedStore = "1";
+            targetItems.clear();
+            map.constructMap(selectedStore);
+        }
 
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction()
@@ -169,9 +173,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void shop3_click(View view){
-        selectedStore = "1";
-        targetItems.clear();
-        map.constructMap(selectedStore);
+        if (!selectedStore.equals("1")) {
+            selectedStore = "1";
+            targetItems.clear();
+            map.constructMap(selectedStore);
+        }
 
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction()

@@ -24,7 +24,7 @@ import com.example.dbms.client.UserErrorDialog;
 import java.util.concurrent.TimeUnit;
 
 public class login_page extends AppCompatActivity {
-    private EditText accountText, passwordText, usernameText;
+    private EditText accountText, passwordText, usernameText, ipText;
     private Client client;
     private ReconnectDialog dialog;
 
@@ -39,7 +39,12 @@ public class login_page extends AppCompatActivity {
             return insets;
         });
 
-        client = new Client();
+        accountText = findViewById(R.id.accountname);
+        passwordText = findViewById(R.id.password);
+        usernameText = findViewById(R.id.UserName);
+        ipText = findViewById(R.id.ipaddress);
+
+        client = new Client(ipText.getText().toString());
 
         for (int i = 0; i < 10 && !client.getConnected(); i++) {
             try {
@@ -51,10 +56,6 @@ public class login_page extends AppCompatActivity {
 
         dialog = new ReconnectDialog(client);
         check();
-
-        accountText = findViewById(R.id.accountname);
-        passwordText = findViewById(R.id.password);
-        usernameText = findViewById(R.id.UserName);
     }
 
     public void check() {
@@ -67,7 +68,7 @@ public class login_page extends AppCompatActivity {
                             if (!client.getConnected()) {
                                 if (!dialog.isAdded()) {
                                     dialog.show(login_page.this.getFragmentManager(), "");
-                                    //client.setIp(ipInput.getText().toString());
+                                    client.setIp(ipText.getText().toString());
                                 }
                             }
                             Log.i("Client Status", String.format("%s", client.getConnected()));
@@ -91,6 +92,7 @@ public class login_page extends AppCompatActivity {
                 it.putExtra("UserID", accountText.getText().toString());
                 it.putExtra("Password", passwordText.getText().toString());
                 it.putExtra("Username", name);
+                it.putExtra("IP", ipText.getText().toString());
                 client.close();
 
                 startActivity(it);
@@ -103,7 +105,7 @@ public class login_page extends AppCompatActivity {
     }
 
     public void register_click(View view) {
-        if (!accountText.getText().toString().isEmpty() && !passwordText.getText().toString().isEmpty()) {
+        if (!accountText.getText().toString().isEmpty() && !passwordText.getText().toString().isEmpty() && !usernameText.getText().toString().isEmpty()) {
             if (client.registerUser(accountText.getText().toString(),  passwordText.getText().toString(), usernameText.getText().toString())) {
                 UserErrorDialog errorDialog = new UserErrorDialog("Okay");
                 errorDialog.show(login_page.this.getFragmentManager(), "");

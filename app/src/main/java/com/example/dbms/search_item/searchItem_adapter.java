@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dbms.R;
@@ -18,18 +19,20 @@ public class searchItem_adapter extends RecyclerView.Adapter<searchItem_viewhold
     private Context con;
     private ArrayList<search_item> items;
     private ArrayList<String> targetItems;
+    private DrawerLayout drawerLayout;
 
-    public searchItem_adapter(Context con, ArrayList<search_item> items, ArrayList<String> targetItems){
+    public searchItem_adapter(Context con, ArrayList<search_item> items, ArrayList<String> targetItems, DrawerLayout drawerLayout){
         this.con = con;
         this.items = items;
         this.targetItems = targetItems;
+        this.drawerLayout = drawerLayout;
     }
 
     @NonNull
     @Override
     public searchItem_viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemview = LayoutInflater.from(con).inflate(R.layout.search_item,parent,false);
-        return new searchItem_viewholder(itemview, targetItems);
+        return new searchItem_viewholder(itemview, targetItems, drawerLayout);
     }
 
     @Override
