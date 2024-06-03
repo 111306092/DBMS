@@ -156,7 +156,9 @@ public class MapFragment extends Fragment {
                             items = new ArrayList<>();
 
                             for (String s: client.getProduct(element.getName().substring(1))) {
-                                items.add(new drawer_item(s));
+                                if (!s.equals("NotFound")) {
+                                    items.add(new drawer_item(s));
+                                }
                             }
                             ((drawerItem_adapter) recyclerView.getAdapter()).changeItems(items);
                             recyclerView.getAdapter().notifyDataSetChanged();
