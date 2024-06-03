@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="2dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -33,23 +34,24 @@
                     android:id="@+id/draweritem_button"
                     android:layout_width="70dp"
                     android:layout_height="match_parent"
+                    android:layout_margin="10dp"
                     android:background="#E1F6D7"
                     android:scaleType="centerInside"
-                    android:layout_margin="10dp"
                     android:src="@drawable/ad1"
                     android:visibility="visible" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout5"
-                    android:layout_marginTop="15dp"
                     android:layout_width="118dp"
-                    android:layout_height="62dp">
+                    android:layout_height="62dp"
+                    android:layout_marginTop="15dp">
 
                     <TextView
                         android:id="@+id/draweritemname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="商品名稱"
+                        android:textColor="#000000"
                         android:textSize="15sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"

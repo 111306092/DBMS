@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="2dp">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="150dp"
         app:cardBackgroundColor="#E1F6D7"
         app:cardCornerRadius="10dp"
@@ -48,6 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="商品名稱"
+                    android:textColor="#000000"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"

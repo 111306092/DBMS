@@ -91,7 +91,6 @@ public class SearchFragment extends Fragment {
         RecyclerView recyclerView = getView().findViewById(R.id.search_recyclerview);
         ArrayList<search_item> items = new ArrayList<search_item>();
 
-
         for (String s: client.getStoreProducts(selectedStore)) {
             items.add(new search_item(s));
         }
