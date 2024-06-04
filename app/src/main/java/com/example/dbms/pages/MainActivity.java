@@ -191,11 +191,17 @@ public class MainActivity extends AppCompatActivity {
         targetShelves.clear();
         order.clear();
 
+        ArrayList<String> shelfIDs = new ArrayList<>();
         for (String s: targetItems) {
             String[] temp = s.split(", ");
 
-            targetShelves.add("S" + client.getTargetShelf(selectedStore, temp[0]));
+            String shelfID = client.getTargetShelf(selectedStore, temp[0]);
+
+            targetShelves.add("S" + shelfID);
+            shelfIDs.add(shelfID + "/AND/" + temp[0]);
         }
+
+        client.updateHistoryCart(user, shelfIDs);
 
         mapUpdated = false;
     }

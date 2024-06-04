@@ -16,9 +16,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.dbms.R;
+import com.example.dbms.cart.cartItem_adapter;
+import com.example.dbms.cart.cart_item;
 import com.example.dbms.client.Client;
 import com.example.dbms.comment.commentItem_adapter;
 import com.example.dbms.comment.comment_item;
+import com.example.dbms.drawer.drawerItem_adapter;
+import com.example.dbms.drawer.drawer_item;
 
 import java.util.ArrayList;
 
@@ -99,6 +103,18 @@ public class PersonalFragment extends Fragment {
         TextView username = getView().findViewById(R.id.username);
         userID.setText(((MainActivity) getActivity()).user);
         username.setText(((MainActivity) getActivity()).username);
+
+        RecyclerView history = getView().findViewById(R.id.carthistory);
+        ArrayList<drawer_item> historyitems = new ArrayList<>();
+
+        for (String s: client.getHistoryCart(userID.getText().toString())) {
+            if (!s.equals("NotFound")) {
+                historyitems.add(new drawer_item(s));
+            }
+        }
+
+        history.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        history.setAdapter(new drawerItem_adapter(this.getContext().getApplicationContext(), historyitems));
 
 
         Button logoutButton = getView().findViewById(R.id.logoutbutton);
