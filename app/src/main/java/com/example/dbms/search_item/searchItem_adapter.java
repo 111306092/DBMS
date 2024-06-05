@@ -10,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dbms.R;
+import com.example.dbms.pages.MainActivity;
 import com.example.dbms.pages.SearchFragment;
 
 import java.lang.reflect.Array;
@@ -40,6 +41,8 @@ public class searchItem_adapter extends RecyclerView.Adapter<searchItem_viewhold
         String[] temp = items.get(position).getItemname().split("/AND/");
 
         holder.getItemname().setText(temp[0]);
+
+        ((MainActivity) fragment.getActivity()).showNotification("Add");
     }
 
     @Override

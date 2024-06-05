@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.dbms.R;
 import com.example.dbms.client.Client;
 import com.example.dbms.client.LogoutWarning;
+import com.example.dbms.client.NotificationDialog;
 import com.example.dbms.client.ReconnectDialog;
 import com.example.dbms.map.Map;
 import com.example.dbms.map.MapElement;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     Client client;
     ReconnectDialog dialog;
     LogoutWarning warning;
+    NotificationDialog notification;
     String user, username;
     String selectedStore;
     ArrayList<String> targetItems;
@@ -65,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
         dialog = new ReconnectDialog(client);
         warning = new LogoutWarning(this);
+        notification = new NotificationDialog();
         targetItems = new ArrayList<>();
         targetShelves = new ArrayList<>();
         order = new ArrayList<>();
@@ -207,6 +210,14 @@ public class MainActivity extends AppCompatActivity {
         client.updateHistoryCart(user, shelfIDs);
 
         mapUpdated = false;
+    }
+
+    public void showNotification(String type) {
+        notification.setMessage(type);
+
+        if (!notification.isAdded()) {
+            notification.show(MainActivity.this.getFragmentManager(), "");
+        }
     }
 
     public void logout() {
