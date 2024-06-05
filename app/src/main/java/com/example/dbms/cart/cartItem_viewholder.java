@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dbms.R;
@@ -18,12 +19,10 @@ public class cartItem_viewholder extends RecyclerView.ViewHolder{
     private ImageButton itemphoto;
     private Button checkbutton;
     private ArrayList<String> targetItems;
-    private cartItem_adapter parentAdaptor;
 
-    public cartItem_viewholder(@NonNull View itemView, ArrayList<String> targetItems, cartItem_adapter parentAdaptor){
+    public cartItem_viewholder(@NonNull View itemView, cartItem_adapter parentAdaptor){
         super(itemView);
-        this.targetItems = targetItems;
-        this.parentAdaptor = parentAdaptor;
+        this.targetItems = parentAdaptor.getFragment().getTargetItems();
 
         itemname = itemView.findViewById(R.id.cartname);
         checkbutton = itemView.findViewById(R.id.cancelbutton);
@@ -41,6 +40,9 @@ public class cartItem_viewholder extends RecyclerView.ViewHolder{
 
                 parentAdaptor.changeItems(targetItems);
                 parentAdaptor.notifyDataSetChanged();
+
+                TextView tv = parentAdaptor.getFragment().getView().findViewById(R.id.carttitle);
+                tv.setText(String.format("您的購物車內目前有%d項商品", targetItems.size()));
             }
         });
     }

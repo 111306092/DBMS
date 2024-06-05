@@ -218,8 +218,8 @@ public class Client {
         return targetShelf;
     }
 
-    public boolean registerUser(String password, String username) {
-        sendOutput(String.format("registerUser/cmdend/%s/ADD/%s", password, username));
+    public boolean registerUser(String userID, String password, String username) {
+        sendOutput(String.format("registerUser/cmdend/%s/ADD/%s/ADD/%s", userID, password, username));
 
         for (int i = 0; i < 100 && !update; i++) {
             try {

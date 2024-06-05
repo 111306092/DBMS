@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.dbms.R;
 import com.example.dbms.comment.commentItem_adapter;
 import com.example.dbms.comment.comment_item;
+import com.example.dbms.pages.MainActivity;
 import com.example.dbms.pages.SearchFragment;
 
 import java.lang.reflect.Array;
@@ -43,6 +44,8 @@ public class searchItem_viewholder extends RecyclerView.ViewHolder {
             public void onClick(View v) {
                 if (targetItems.size() < 20 && !targetItems.contains(itemname.getText().toString())) {
                     targetItems.add(itemname.getText().toString());
+
+                    ((MainActivity) fragment.getActivity()).showNotification("Add");
                 }
             }
         });

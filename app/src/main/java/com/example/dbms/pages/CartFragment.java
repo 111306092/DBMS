@@ -38,6 +38,7 @@ public class CartFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private ArrayList<String> targetItems;
+    ArrayList<cart_item> items;
 
     public CartFragment() {
         // Required empty public constructor
@@ -101,16 +102,24 @@ public class CartFragment extends Fragment {
         targetItems = ((MainActivity) getActivity()).targetItems;
 
         RecyclerView recyclerView = getView().findViewById(R.id.cartrecyclerview);
-        ArrayList<cart_item> items = new ArrayList<cart_item>();
+        items = new ArrayList<>();
 
         for (String s: targetItems) {
             items.add(new cart_item(s));
         }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        recyclerView.setAdapter(new cartItem_adapter(this.getContext().getApplicationContext(),items, targetItems));
+        recyclerView.setAdapter(new cartItem_adapter(this.getContext().getApplicationContext(), this));
 
         TextView tv = getView().findViewById(R.id.carttitle);
         tv.setText(String.format("您的購物車內目前有%d項商品", targetItems.size()));
+    }
+
+    public ArrayList<cart_item> getItems() {
+        return items;
+    }
+
+    public ArrayList<String> getTargetItems() {
+        return targetItems;
     }
 }

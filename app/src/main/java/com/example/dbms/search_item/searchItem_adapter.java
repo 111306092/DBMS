@@ -41,8 +41,6 @@ public class searchItem_adapter extends RecyclerView.Adapter<searchItem_viewhold
         String[] temp = items.get(position).getItemname().split("/AND/");
 
         holder.getItemname().setText(temp[0]);
-
-        ((MainActivity) fragment.getActivity()).showNotification("Add");
     }
 
     @Override

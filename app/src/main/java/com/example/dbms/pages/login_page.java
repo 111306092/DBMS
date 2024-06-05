@@ -105,8 +105,8 @@ public class login_page extends AppCompatActivity {
     }
 
     public void register_click(View view) {
-        if (!passwordText.getText().toString().isEmpty() && !usernameText.getText().toString().isEmpty()) {
-            if (client.registerUser(passwordText.getText().toString(), usernameText.getText().toString())) {
+        if (!accountText.getText().toString().isEmpty() && !passwordText.getText().toString().isEmpty() && !usernameText.getText().toString().isEmpty()) {
+            if (client.registerUser(accountText.getText().toString(), passwordText.getText().toString(), usernameText.getText().toString())) {
                 UserErrorDialog errorDialog = new UserErrorDialog("Okay");
                 errorDialog.show(login_page.this.getFragmentManager(), "");
             } else {
