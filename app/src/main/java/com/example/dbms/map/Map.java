@@ -1,5 +1,7 @@
 package com.example.dbms.map;
 
+import android.util.Log;
+
 import com.example.dbms.client.Client;
 
 import java.util.ArrayList;
@@ -46,6 +48,8 @@ public class Map {
             String[] temp = s.split(", ");
             int row = Integer.parseInt(temp[1]);
             int col = Integer.parseInt(temp[2]);
+
+            Log.i("Debug", row + ", " + col);
 
             mapMatrix[row][col] = 1;
         }

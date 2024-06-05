@@ -90,7 +90,7 @@ public class PersonalFragment extends Fragment {
         ArrayList<comment_item> items = new ArrayList<comment_item>();
 
         for (String s: client.getUserComments(((MainActivity) getActivity()).user)) {
-            if (!s.equals("NotFound")) {
+            if (!(s.equals("NotFound") || s.isEmpty())) {
                 String[] temp = s.split("/AND/");
                 items.add(new comment_item(temp[0],temp[1]));
             }
@@ -108,7 +108,7 @@ public class PersonalFragment extends Fragment {
         ArrayList<drawer_item> historyitems = new ArrayList<>();
 
         for (String s: client.getHistoryCart(userID.getText().toString())) {
-            if (!s.equals("NotFound")) {
+            if (!(s.equals("NotFound") || s.isEmpty())) {
                 historyitems.add(new drawer_item(s));
             }
         }

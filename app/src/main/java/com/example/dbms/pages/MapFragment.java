@@ -156,7 +156,7 @@ public class MapFragment extends Fragment {
                             items = new ArrayList<>();
 
                             for (String s: client.getProduct(element.getName().substring(1))) {
-                                if (!s.equals("NotFound")) {
+                                if (!(s.equals("NotFound") || s.isEmpty())) {
                                     items.add(new drawer_item(s));
                                 }
                             }
@@ -253,28 +253,30 @@ public class MapFragment extends Fragment {
                 cv.setCardBackgroundColor(Color.RED);
             }
             //Send product list to back end to save it in the database
-            Route route = new Route(total_Row, total_Col, map.getStart(), map.getEnd(), order);
+            if (!order.isEmpty()) {
+                Route route = new Route(total_Row, total_Col, map.getStart(), map.getEnd(), order);
 
-            boolean[][] isRoute = route.getIsRoute();
+                boolean[][] isRoute = route.getIsRoute();
 
-            for (int i = 0; i < total_Row; i++) {
-                for (int j = 0; j < total_Col; j++) {
-                    if (isRoute[i][j]) {
-                        View view = gridLayout.getChildAt(i * total_Col + j);
-                        CardView cv = view.findViewById(R.id.HorizontalWalkwayCard);
-
-                        if (cv != null) {
-                            cv.setCardBackgroundColor(Color.YELLOW);
-                        } else {
-                            cv = view.findViewById(R.id.VerticalWalkwayCard);
+                for (int i = 0; i < total_Row; i++) {
+                    for (int j = 0; j < total_Col; j++) {
+                        if (isRoute[i][j]) {
+                            View view = gridLayout.getChildAt(i * total_Col + j);
+                            CardView cv = view.findViewById(R.id.HorizontalWalkwayCard);
 
                             if (cv != null) {
                                 cv.setCardBackgroundColor(Color.YELLOW);
                             } else {
-                                cv = view.findViewById(R.id.IntersectionCard);
+                                cv = view.findViewById(R.id.VerticalWalkwayCard);
 
                                 if (cv != null) {
                                     cv.setCardBackgroundColor(Color.YELLOW);
+                                } else {
+                                    cv = view.findViewById(R.id.IntersectionCard);
+
+                                    if (cv != null) {
+                                        cv.setCardBackgroundColor(Color.YELLOW);
+                                    }
                                 }
                             }
                         }

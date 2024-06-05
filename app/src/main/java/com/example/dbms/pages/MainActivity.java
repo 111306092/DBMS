@@ -146,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
         if (!selectedStore.equals("1")) {
             selectedStore = "1";
             targetItems.clear();
+            order.clear();
             map.constructMap(selectedStore);
         }
 
@@ -158,9 +159,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void shop2_click(View view){
-        if (!selectedStore.equals("1")) {
-            selectedStore = "1";
+        if (!selectedStore.equals("2")) {
+            selectedStore = "2";
             targetItems.clear();
+            order.clear();
             map.constructMap(selectedStore);
         }
 
@@ -173,9 +175,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void shop3_click(View view){
-        if (!selectedStore.equals("1")) {
-            selectedStore = "1";
+        if (!selectedStore.equals("3")) {
+            selectedStore = "3";
             targetItems.clear();
+            order.clear();
             map.constructMap(selectedStore);
         }
 

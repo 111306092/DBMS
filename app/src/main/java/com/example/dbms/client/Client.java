@@ -218,8 +218,8 @@ public class Client {
         return targetShelf;
     }
 
-    public boolean registerUser(String userID, String password, String username) {
-        sendOutput(String.format("registerUser/cmdend/%s/ADD/%s/ADD/%s", userID, password, username));
+    public boolean registerUser(String password, String username) {
+        sendOutput(String.format("registerUser/cmdend/%s/ADD/%s", password, username));
 
         for (int i = 0; i < 100 && !update; i++) {
             try {
@@ -310,6 +310,26 @@ public class Client {
         update = false;
 
         return carts;
+    }
+
+    public ArrayList<String> getPriceHistory(String ProductName, String StoreID) {
+        sendOutput(String.format("getPriceHistory/cmdend/%s/ADD/%s", ProductName, StoreID));
+
+        for (int i = 0; i < 100 && !update; i++) {
+            try {
+                TimeUnit.MILLISECONDS.sleep(100);
+            } catch (InterruptedException e1) {
+                Log.i("Debug", "sleep Interrupted");
+            }
+        }
+
+        ArrayList<String> prices = new ArrayList<String>();
+        prices.addAll(Arrays.asList(input.split("/ADD/")));
+
+        input = "";
+        update = false;
+
+        return prices;
     }
 
     public void updateHistoryCart(String userID, ArrayList<String> values) {

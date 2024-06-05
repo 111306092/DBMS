@@ -150,7 +150,7 @@ public class SearchFragment extends Fragment {
         ArrayList<comment_item> items = new ArrayList<>();
 
         for (String s: getProductComments(name.getText().toString())) {
-            if (!s.equals("NotFound")) {
+            if (!(s.equals("NotFound") || s.isEmpty())) {
                 items.add(new comment_item(name.getText().toString(), s));
             }
         }
@@ -172,6 +172,21 @@ public class SearchFragment extends Fragment {
                 }
             }
         });
+
+        //Price History
+        RecyclerView priceHistory = getView().findViewById(R.id.pricehistory);
+        ArrayList<comment_item> prices = new ArrayList<>();
+
+        for (String s: client.getPriceHistory(temp[0], selectedStore)) {
+            if (!(s.equals("NotFound") || s.isEmpty())) {
+                String[] priceInfo = s.split("/AND/");
+
+                prices.add(new comment_item(priceInfo[0], priceInfo[1]));
+            }
+        }
+
+        priceHistory.setLayoutManager(new LinearLayoutManager(getContext()));
+        priceHistory.setAdapter(new commentItem_adapter(getContext().getApplicationContext(),prices));
 
         getDrawerLayout().openDrawer(GravityCompat.START);
     }
