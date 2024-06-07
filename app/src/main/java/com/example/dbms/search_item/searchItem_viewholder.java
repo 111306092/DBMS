@@ -44,9 +44,9 @@ public class searchItem_viewholder extends RecyclerView.ViewHolder {
             public void onClick(View v) {
                 if (targetItems.size() < 20 && !targetItems.contains(itemname.getText().toString())) {
                     targetItems.add(itemname.getText().toString());
-
-                    ((MainActivity) fragment.getActivity()).showNotification("Add");
                 }
+
+                ((MainActivity) fragment.getActivity()).showNotification("Add");
             }
         });
 

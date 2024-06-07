@@ -24,8 +24,15 @@ import com.example.dbms.comment.commentItem_adapter;
 import com.example.dbms.comment.comment_item;
 import com.example.dbms.search_item.searchItem_adapter;
 import com.example.dbms.search_item.search_item;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -174,6 +181,7 @@ public class SearchFragment extends Fragment {
         });
 
         //Price History
+        /*
         RecyclerView priceHistory = getView().findViewById(R.id.pricehistory);
         ArrayList<comment_item> prices = new ArrayList<>();
 
@@ -187,6 +195,45 @@ public class SearchFragment extends Fragment {
 
         priceHistory.setLayoutManager(new LinearLayoutManager(getContext()));
         priceHistory.setAdapter(new commentItem_adapter(getContext().getApplicationContext(),prices));
+         */
+        LineChart priceGraph = getView().findViewById(R.id.pricegraph);
+        priceGraph.getAxisRight().setDrawLabels(false);
+        priceGraph.getAxisRight().setDrawGridLines(false);
+        priceGraph.getAxisLeft().setDrawLabels(false);
+        priceGraph.getAxisLeft().setDrawGridLines(false);
+        priceGraph.getXAxis().setDrawLabels(false);
+        priceGraph.getXAxis().setDrawGridLines(false);
+
+        Description description = priceGraph.getDescription();
+        description.setText("");
+
+        List<Entry> historicalPrices = new ArrayList<>();
+
+        int count = 0;
+
+        for (String s: client.getPriceHistory(temp[0], selectedStore)) {
+            if (!(s.equals("NotFound") || s.isEmpty())) {
+                String[] priceInfo = s.split("/AND/");
+
+                historicalPrices.add(new Entry(count, Integer.parseInt(priceInfo[1])));
+            }
+
+            count++;
+        }
+
+        LineDataSet dataSet = new LineDataSet(historicalPrices, temp[0]);
+        dataSet.setColor(Color.RED);
+        dataSet.setLineWidth(4);
+        dataSet.setDrawCircleHole(false);
+        dataSet.setCircleColor(Color.RED);
+        dataSet.setCircleRadius(8);
+        dataSet.setValueTextSize(8);
+        dataSet.setValueTextColor(Color.RED);
+
+        LineData data = new LineData(dataSet);
+
+        priceGraph.setData(data);
+        priceGraph.invalidate();
 
         getDrawerLayout().openDrawer(GravityCompat.START);
     }

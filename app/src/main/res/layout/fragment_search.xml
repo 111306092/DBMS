@@ -123,10 +123,12 @@
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/pricehistory"
+                        <com.github.mikephil.charting.charts.LineChart
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="200dp"
+                            android:id="@+id/pricegraph">
+
+                        </com.github.mikephil.charting.charts.LineChart>
 
                         <TextView
                             android:id="@+id/comments"
