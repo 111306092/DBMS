@@ -250,7 +250,7 @@ public class MapFragment extends Fragment {
 
                 View view = gridLayout.getChildAt(index);
                 CardView cv = view.findViewById(R.id.ShelfCard);
-                cv.setCardBackgroundColor(Color.RED);
+                cv.setCardBackgroundColor(Color.parseColor("#ffcf56"));
             }
             //Send product list to back end to save it in the database
             if (!order.isEmpty()) {
@@ -265,23 +265,34 @@ public class MapFragment extends Fragment {
                             CardView cv = view.findViewById(R.id.HorizontalWalkwayCard);
 
                             if (cv != null) {
-                                cv.setCardBackgroundColor(Color.YELLOW);
+                                cv.setCardBackgroundColor(Color.parseColor("#88daff"));
                             } else {
                                 cv = view.findViewById(R.id.VerticalWalkwayCard);
 
                                 if (cv != null) {
-                                    cv.setCardBackgroundColor(Color.YELLOW);
+                                    cv.setCardBackgroundColor(Color.parseColor("#88daff"));
                                 } else {
                                     cv = view.findViewById(R.id.IntersectionCard);
 
                                     if (cv != null) {
-                                        cv.setCardBackgroundColor(Color.YELLOW);
+                                        cv.setCardBackgroundColor(Color.parseColor("#88daff"));
                                     }
                                 }
                             }
                         }
                     }
                 }
+
+                Intersection start = map.getStart();
+                Intersection end = map.getEnd();
+
+                View startView = gridLayout.getChildAt(start.getRow() * total_Col + start.getCol());
+                CardView startCard = startView.findViewById(R.id.IntersectionCard);
+                startCard.setCardBackgroundColor(Color.parseColor("#0ed145"));
+
+                View endView = gridLayout.getChildAt(end.getRow() * total_Col + end.getCol());
+                CardView endCard = endView.findViewById(R.id.IntersectionCard);
+                endCard.setCardBackgroundColor(Color.parseColor("#ff444b"));
             }
         }
     }
