@@ -64,13 +64,4 @@ public class guideFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_guide, container, false);
     }
-
-    public void onClick(View v){
-        FragmentManager manager = getActivity().getSupportFragmentManager();
-        manager.beginTransaction()
-                .replace(R.id.MainFragment, MainFragment.class, null)
-                .setReorderingAllowed(true)
-                .addToBackStack("Main")
-                .commit();
-    }
 }

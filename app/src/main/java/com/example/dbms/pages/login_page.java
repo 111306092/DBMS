@@ -88,7 +88,7 @@ public class login_page extends AppCompatActivity {
             String name = client.getUser(accountText.getText().toString(), passwordText.getText().toString());
 
             if (!name.isEmpty()) {
-                Intent it = new Intent(login_page.this,MainActivity.class);
+                Intent it = new Intent(login_page.this, MainActivity.class);
                 it.putExtra("UserID", accountText.getText().toString());
                 it.putExtra("Password", passwordText.getText().toString());
                 it.putExtra("Username", name);

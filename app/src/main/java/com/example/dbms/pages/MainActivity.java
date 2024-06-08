@@ -81,6 +81,13 @@ public class MainActivity extends AppCompatActivity {
             username = getIntent().getStringExtra("Username");
         }
 
+        FragmentManager manager = getSupportFragmentManager();
+        manager.beginTransaction()
+                .replace(R.id.MainFragment, guideFragment.class, null)
+                .setReorderingAllowed(true)
+                .addToBackStack("Guide")
+                .commit();
+
         check();
     }
 
@@ -107,6 +114,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         thread.start();
+    }
+
+    public void okayClick(View v){
+        FragmentManager manager = getSupportFragmentManager();
+        manager.beginTransaction()
+                .replace(R.id.MainFragment, MainFragment.class, null)
+                .setReorderingAllowed(true)
+                .addToBackStack("Main")
+                .commit();
     }
 
     public void personpage_click(View view){

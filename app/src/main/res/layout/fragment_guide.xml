@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="550dp"
-    android:onClick="onClick"
     android:orientation="vertical">
 
 
@@ -44,6 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"
                     android:background="@drawable/login_page_button"
+                    android:onClick="okayClick"
                     android:text="我學會了，馬上進入賣場"
                     android:textColor="@color/black"
                     android:textSize="20dp"
