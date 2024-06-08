@@ -88,7 +88,9 @@ public class CartFragment extends Fragment {
         pathButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mainActivity.updateHistoryRecord();
                 mainActivity.setTargetShelves();
+
 
                 FragmentManager manager = getActivity().getSupportFragmentManager();
                 manager.beginTransaction()

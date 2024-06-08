@@ -27,14 +27,16 @@ import com.example.dbms.map.Shelf;
 
 import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
-    Client client;
+    static Client client;
     ReconnectDialog dialog;
     LogoutWarning warning;
     NotificationDialog notification;
-    String user, username;
+    static String user;
+    String username;
     String selectedStore;
     ArrayList<String> targetItems;
     ArrayList<String> targetShelves;
@@ -217,6 +219,17 @@ public class MainActivity extends AppCompatActivity {
 
         if (!notification.isAdded()) {
             notification.show(MainActivity.this.getFragmentManager(), "");
+        }
+    }
+
+    public static ArrayList<String> updateHistoryRecord(){
+
+        ArrayList<String> records = client.getHistoryCart(user);
+
+        if(!records.isEmpty()){
+            return records;
+        }else{
+            return null;
         }
     }
 
