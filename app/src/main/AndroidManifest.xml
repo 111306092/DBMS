@@ -19,9 +19,6 @@
             android:name=".drawer.drawer_item"
             android:exported="false" />
         <activity
-            android:name=".pages.item_page"
-            android:exported="false" />
-        <activity
             android:name=".pages.login_page"
             android:exported="true">
             <intent-filter>
@@ -30,18 +27,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".pages.map"
-            android:exported="false" />
-        <activity
-            android:name=".pages.cart_page"
-            android:exported="false" />
-        <activity
-            android:name=".pages.personal_page"
-            android:exported="false" />
-        <activity
-            android:name=".pages.search_page"
-            android:exported="false" />
         <activity
             android:name=".pages.MainActivity"
             android:exported="false" />

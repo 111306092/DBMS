@@ -28,7 +28,7 @@
             android:ems="10"
             android:hint="IP地址"
             android:inputType="text"
-            android:text="192.168.124.45"
+            android:text="192.168.168.174"
             android:textAlignment="center"
             android:textColor="#000000"
             app:layout_constraintStart_toStartOf="parent"
